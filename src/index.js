@@ -1,6 +1,6 @@
 import { ServiceBusClient } from '@azure/service-bus'
 
-const connectionString = 'Endpoint=sb://default.default.default.localhost;SharedAccessKeyName=anything;SharedAccessKey=anything;UseDevelopmentEmulator=true'
+const connectionString = 'Endpoint=sb://localhost;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=SAS_KEY_VALUE;UseDevelopmentEmulator=true;'
 const client = new ServiceBusClient(connectionString)
 
 import { sendToQueue, receiveFromQueue } from './queue.js'

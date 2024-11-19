@@ -1,7 +1,21 @@
 services:
-  local-sandbox:
-    image: localsandbox/localsandbox
-    container_name: local-sandbox
+  emulator:
+    container_name: servicebus-emulator
+    image: mcr.microsoft.com/azure-messaging/servicebus-emulator:latest
+    volumes:
+      - "./config.json:/ServiceBus_Emulator/ConfigFiles/Config.json"
     ports:
-      - "7329:7329"
       - "5672:5672"
+    environment:
+      SQL_SERVER: sqledge
+      MSSQL_SA_PASSWORD: Some-really-strong-password!123
+      ACCEPT_EULA: "Y"
+    depends_on:
+      - sqledge
+
+  sqledge:
+    container_name: sqledge
+    image: "mcr.microsoft.com/azure-sql-edge:latest"
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: Some-really-strong-password!123
